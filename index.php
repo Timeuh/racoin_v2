@@ -77,9 +77,9 @@ $app->get('/', function () use ($twig, $menu, $chemin, $categorie) {
 });
 
 $app->get('/item/{n}', function ($request, $response, $arg) use ($twig, $menu, $chemin, $categorie) {
-    $categorieId     = $arg['n'];
+    $itemId     = $arg['n'];
     $item = new item();
-    $item->afficherItem($twig, $menu, $chemin, $categorieId, $categorie->getCategories());
+    $item->afficherItem($twig, $menu, $chemin, $itemId, $categorie->getCategories());
 });
 
 $app->get('/add', function () use ($twig, $app, $menu, $chemin, $categorie, $dpt) {
@@ -126,9 +126,9 @@ $app->post('/search', function ($request, $response) use ($app, $twig, $menu, $c
 });
 
 $app->get('/annonceur/{n}', function ($request, $response, $arg) use ($twig, $menu, $chemin, $categorie) {
-    $categorieId         = $arg['n'];
+    $annonceurId         = $arg['n'];
     $annonceur = new controller\viewAnnonceur();
-    $annonceur->afficherAnnonceur($twig, $menu, $chemin, $categorieId, $categorie->getCategories());
+    $annonceur->afficherAnnonceur($twig, $menu, $chemin, $annonceurId, $categorie->getCategories());
 });
 
 $app->get('/del/{n}', function ($request, $response, $arg) use ($twig, $menu, $chemin) {

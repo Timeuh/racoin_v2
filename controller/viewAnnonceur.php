@@ -14,27 +14,21 @@ use model\Photo;
 class viewAnnonceur {
     public function __construct(){
     }
-    function afficherAnnonceur($twig, $menu, $chemin, $n, $cat) {
-        $this->annonceur = annonceur::find($n);
+    function afficherAnnonceur($twig, $menu, $chemin, $idAnnonceur, $cat) {
+        $this->annonceur = annonceur::find($idAnnonceur);
         if(!isset($this->annonceur)){
             echo "404";
             return;
         }
-        $tmp = annonce::where('id_annonceur','=',$n)->get();
+        $annonces = annonce::where('id_annonceur', '=', $idAnnonceur)->get();
 
-        $annonces = [];
-        foreach ($tmp as $a) {
-            $a->nb_photo = Photo::where('id_annonce', '=', $a->id_annonce)->count();
-            if($a->nb_photo>0){
-                $a->url_photo = Photo::select('url_photo')
-                    ->where('id_annonce', '=', $a->id_annonce)
-                    ->first()->url_photo;
-            }else{
-                $a->url_photo = $chemin.'/img/noimg.png';
-            }
-
-            $annonces[] = $a;
+        foreach ($annonces as $annonceActuelle) {
+            $annonceActuelle->nb_photo = $annonceActuelle->photo()->count();
+            $annonceActuelle->url_photo = $annonceActuelle->nb_photo > 0
+                ? $annonceActuelle->photo()->first()->url_photo
+                : $chemin . '/img/noimg.png';
         }
+
         $template = $twig->load("annonceur.html.twig");
         echo $template->render(array('nom' => $this->annonceur,
             "chemin" => $chemin,
