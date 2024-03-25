@@ -42,49 +42,18 @@ class addItem
         $password_confirm = trim($_POST['confirm-psw']);
 
         // Tableau d'erreurs personnalisées
-        $errors                          = array();
-        $errors['nameAdvertiser']        = '';
-        $errors['emailAdvertiser']       = '';
-        $errors['phoneAdvertiser']       = '';
-        $errors['villeAdvertiser']       = '';
-        $errors['departmentAdvertiser']  = '';
-        $errors['categorieAdvertiser']   = '';
-        $errors['titleAdvertiser']       = '';
-        $errors['descriptionAdvertiser'] = '';
-        $errors['priceAdvertiser']       = '';
-        $errors['passwordAdvertiser']    = '';
-
+        $errors = [];
         // On teste que les champs ne soient pas vides et soient de bons types
-        if (empty($nom)) {
-            $errors['nameAdvertiser'] = 'Veuillez entrer votre nom';
-        }
-        if (!EmailChecker::isEmail($email)) {
-            $errors['emailAdvertiser'] = 'Veuillez entrer une adresse mail correcte';
-        }
-        if (empty($phone) && !is_numeric($phone)) {
-            $errors['phoneAdvertiser'] = 'Veuillez entrer votre numéro de téléphone';
-        }
-        if (empty($ville)) {
-            $errors['villeAdvertiser'] = 'Veuillez entrer votre ville';
-        }
-        if (!is_numeric($departement)) {
-            $errors['departmentAdvertiser'] = 'Veuillez choisir un département';
-        }
-        if (!is_numeric($categorie)) {
-            $errors['categorieAdvertiser'] = 'Veuillez choisir une catégorie';
-        }
-        if (empty($title)) {
-            $errors['titleAdvertiser'] = 'Veuillez entrer un titre';
-        }
-        if (empty($description)) {
-            $errors['descriptionAdvertiser'] = 'Veuillez entrer une description';
-        }
-        if (empty($price) || !is_numeric($price)) {
-            $errors['priceAdvertiser'] = 'Veuillez entrer un prix';
-        }
-        if (empty($password) || empty($password_confirm) || $password != $password_confirm) {
-            $errors['passwordAdvertiser'] = 'Les mots de passes ne sont pas identiques';
-        }
+        $errors['nameAdvertiser'] = empty($nom) ? 'Veuillez entrer votre nom' : '';
+        $errors['emailAdvertiser'] = !EmailChecker::isEmail($email) ? 'Veuillez entrer une adresse mail correcte' : '';
+        $errors['phoneAdvertiser'] = empty($phone) && !is_numeric($phone) ? 'Veuillez entrer votre numéro de téléphone' : '';
+        $errors['villeAdvertiser'] = empty($ville) ? 'Veuillez entrer votre ville' : '';
+        $errors['departmentAdvertiser'] = !is_numeric($departement) ? 'Veuillez choisir un département' : '';
+        $errors['categorieAdvertiser'] = !is_numeric($categorie) ? 'Veuillez choisir une catégorie' : '';
+        $errors['titleAdvertiser'] = empty($title) ? 'Veuillez entrer un titre' : '';
+        $errors['descriptionAdvertiser'] = empty($description) ? 'Veuillez entrer une description' : '';
+        $errors['priceAdvertiser'] = empty($price) || !is_numeric($price) ? 'Veuillez entrer un prix' : '';
+        $errors['passwordAdvertiser'] = empty($password) || empty($password_confirm) || $password != $password_confirm ? 'Les mots de passes ne sont pas identiques' : '';
 
         // On vire les cases vides
         $errors = array_values(array_filter($errors));
