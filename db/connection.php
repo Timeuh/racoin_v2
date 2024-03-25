@@ -8,7 +8,7 @@ use Illuminate\Container\Container;
 
 class connection {
 
-    public static function createConn() {
+    public static function createConnection() {
         $capsule = new DB;
         $capsule->addConnection(parse_ini_file(__DIR__ . '/../config/config.ini'));
         $capsule->setAsGlobal();
