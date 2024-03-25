@@ -11,7 +11,8 @@
         "psr-0":{
             "controller":"",
             "model":"",
-            "db":""
+            "db":"",
+            "common": ""
         }
     },
     "config": {
