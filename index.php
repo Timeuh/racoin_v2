@@ -6,10 +6,9 @@ use controller\getDepartment;
 use controller\index;
 use controller\item;
 use db\connection;
-
 use model\Annonce;
-use model\Categorie;
 use model\Annonceur;
+use model\Categorie;
 use model\Departement;
 use Slim\App;
 use Slim\Http\Request;
@@ -147,7 +146,7 @@ $app->post('/del/{n}', function ($request, $response, $arg) use ($twig, $menu, $
 $app->get('/cat/{n}', function ($request, $response, $arg) use ($twig, $menu, $chemin, $categorie) {
     $categorieId = $arg['n'];
     $categorie = new controller\getCategorie();
-    $categorie->displayCategorie($twig, $menu, $chemin, $categorie->getCategories(), $categorieId);
+    $categorie->displayCategorie($twig, $chemin, $categorie->getCategories(), $categorieId);
 });
 
 $app->get('/api(/)', function () use ($twig, $menu, $chemin, $categorie) {
