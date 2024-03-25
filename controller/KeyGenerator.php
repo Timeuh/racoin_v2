@@ -4,9 +4,10 @@ namespace controller;
 
 use model\ApiKey;
 
-class KeyGenerator {
-
-    function show($twig, $menu, $chemin, $cat) {
+class KeyGenerator
+{
+    public function show($twig, $menu, $chemin, $cat)
+    {
         $template = $twig->load("key-generator.html.twig");
         $menu = array(
             array('href' => $chemin,
@@ -17,7 +18,8 @@ class KeyGenerator {
         echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin, "categories" => $cat));
     }
 
-    function generateKey($twig, $menu, $chemin, $cat, $nom) {
+    public function generateKey($twig, $menu, $chemin, $cat, $nom)
+    {
         $nospace_nom = str_replace(' ', '', $nom);
 
         if($nospace_nom === '') {
@@ -54,5 +56,3 @@ class KeyGenerator {
     }
 
 }
-
-?>

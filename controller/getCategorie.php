@@ -5,16 +5,18 @@ namespace controller;
 use model\Annonce;
 use model\Categorie;
 
-class getCategorie {
-
+class getCategorie
+{
     protected $categories = array();
 
-    public function getCategories() {
+    public function getCategories()
+    {
         return Categorie::orderBy('nom_categorie')->get()->toArray();
     }
 
-    public function getCategorieContent($chemin, $categorieId): array {
-        $annonces = Annonce::with("Annonceur")->orderBy('id_annonce','desc')->where('id_categorie', "=", $categorieId)->get();
+    public function getCategorieContent($chemin, $categorieId): array
+    {
+        $annonces = Annonce::with("Annonceur")->orderBy('id_annonce', 'desc')->where('id_categorie', "=", $categorieId)->get();
         $annoncesToReturn = [];
         foreach($annonces as $annonce) {
             $annonce->nb_photo = $annonce->photo->count();
@@ -25,7 +27,8 @@ class getCategorie {
         return $annoncesToReturn;
     }
 
-    public function displayCategorie($twig, $chemin, $categories, $categorieId): void {
+    public function displayCategorie($twig, $chemin, $categories, $categorieId): void
+    {
         $template = $twig->load("index.html.twig");
         $menu = [
             [

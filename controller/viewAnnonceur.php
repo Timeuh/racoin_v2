@@ -7,16 +7,19 @@
  */
 
 namespace controller;
+
 use model\Annonce;
 use model\Annonceur;
-use model\Photo;
 
-class viewAnnonceur {
-    public function __construct(){
+class viewAnnonceur
+{
+    public function __construct()
+    {
     }
-    function afficherAnnonceur($twig, $menu, $chemin, $idAnnonceur, $cat) {
+    public function afficherAnnonceur($twig, $menu, $chemin, $idAnnonceur, $cat)
+    {
         $this->annonceur = annonceur::find($idAnnonceur);
-        if(!isset($this->annonceur)){
+        if(!isset($this->annonceur)) {
             echo "404";
             return;
         }
